@@ -1,0 +1,223 @@
+//Problem 3 : Valid Parentheses //
+
+//
+
+Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+An input string is valid if:
+
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+ 
+
+Example 1:
+
+Input: s = "()"
+Output: true
+Example 2:
+
+Input: s = "()[]{}"
+Output: true
+Example 3:
+
+Input: s = "(]"
+Output: false
+
+
+
+Constraints:
+
+1 <= s.length <= 104
+s consists of parentheses only '()[]{}'.
+
+
+//
+
+
+//Solution//
+
+
+class Solution {
+    public boolean isValid(String s) {
+        boolean test=true;
+        
+        // edge case 1 : null //
+        
+        if (s==null)
+            return false;
+        
+        //size of the string//
+        
+        int size=s.toCharArray().length;
+        
+        
+        //stack to load characters//
+        
+        Stack<Character> st=new Stack<Character>();
+        
+        //character array of the given string//
+        
+        char[] charr = s.toCharArray();
+        
+        
+        // edge case 2 : 'string length is 1' //
+        
+        if (size==1)
+            return false;
+        
+        //edge case 3 : 'if the 1st character is a closing parantheses' // 
+        
+        if (charr[0]==')' || charr[0]==']' || charr[0]=='}')
+            return false;
+        
+        
+        
+        for (int i=0;i<size;i++)
+        {
+            // push 1st character always//
+            
+            if (i==0)
+                st.push(charr[i]);
+            
+            
+            // for 2nd character and so on... // 
+            
+            else 
+            {   
+                
+                // if stack empty // 
+                
+                if (st.empty()==true)
+                {
+                    //if the current character is a closing parantheses // 
+                    
+                    if (charr[i]=='}' || charr[i]==')' || charr[i]==']')
+                        
+                {
+                    test=false;
+                    break;
+                }
+                
+                }
+                
+                //
+                
+                //if the current character is an opening parantheses//
+                
+                if (charr[i]=='{' || charr[i]=='(' || charr[i]=='[')
+                {
+                    //push to stack//
+                    
+                    st.push(charr[i]);
+                    
+                    //
+                    
+                    
+                    //if the current character is the last// 
+                    
+                    if (i==(size-1))
+                        
+                        //if stack is not empty,test fails//
+                        
+                        if (st.empty()==false)
+                            test=false;
+                        //
+                    
+                    continue;
+                }
+                
+                //checking for the top of stack as any of the 3 characters//
+                
+                else if (st.peek()=='(')
+                {
+                    if (charr[i]==')')
+                    {
+                        //open-close pair is found, pop stack//
+                        
+                         char p = st.pop();
+                    
+                        //
+                        
+                        //test for stack at last character//
+                        
+                        if (i==size-1)
+                            if (st.empty()==false)
+                              test=false;
+                        
+                        continue;
+                    } 
+                    
+                    //open-close pair not satisfied//
+                    
+                    else
+                    {
+                       test=false;
+                       break;
+                    }
+                    
+                    //
+                }
+                
+                 else if (st.peek()=='[')
+                {
+                    if (charr[i]==']')
+                    {
+                         char p = st.pop();
+                        if (i==size-1)
+                          if (st.empty()==false)
+                              test=false;
+                        
+                        continue;
+                    } 
+                    else
+                    {
+                       test=false;
+                        break;
+                        
+                    } 
+                }
+
+                 else if (st.peek()== '{' )
+                {
+                    if (charr[i]== '}')
+                    {
+                         char p = st.pop();
+                        if (i==size-1)
+                            if (st.empty()==false)
+                                test=false;
+                        
+                        continue;
+                    } 
+                    else
+                    {
+                       test=false;
+                        break;
+                        
+                    } 
+                }
+                
+                //
+                    
+                
+                }
+            
+            
+           
+            
+            
+            }
+        return test;
+        }
+        
+        
+    }
+    
+    
+ //Submission result//
+
+//
+Runtime: 1 ms, faster than 99.06% of Java online submissions for Valid Parentheses.
+Memory Usage: 37.5 MB, less than 71.75% of Java online submissions for Valid Parentheses.
+//
+
+
