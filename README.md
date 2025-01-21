@@ -1,1 +1,1 @@
-## Hello! In this repo, you can find my solutions to Leetcode problems in Java.
+## Hello! In this repository, you will find my solutions to a select Leetcode problems in Java.
