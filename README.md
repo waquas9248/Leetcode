@@ -1,3 +1,3 @@
 ## Hello! 
 
-### In this repository, you will find my solutions to some Leetcode problems in Java.
+### In this repository, you will find some of my solutions to Leetcode problems in Java.
